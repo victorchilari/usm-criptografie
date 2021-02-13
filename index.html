@@ -5,8 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Criptografie - lab. 1</title>
+		<link rel="stylesheet" href="main.css" />
 	</head>
-	<body>
+	<body class="wrapper">
 		<div class="container">
 			<div class="title">Sisteme de criptare clasice</div>
 		</div>
@@ -14,26 +15,32 @@
 			<div class="area">
 				<div class="area-title">Precizati tipul sistemului de criptare</div>
 				<div class="area-content">
-					<input type="radio" name="ccp" id="ccp" />
-					<label for="ccp">Cifru cu permutare</label>
-					<input type="radio" name="ccs" id="ccs" />
-					<label for="ccs">Cifru cu substitutie</label>
-					<input type="radio" name="cmcpss" id="cmcpss" />
-					<label for="cmcpss">Cifru mixt cu permutare si substitutie</label>
+					<form onchange="radioHandler()" id="radio">
+						<input type="radio" name="sdc" id="ccp" value="ccp" checked />
+						<label for="ccp">Cifru cu permutare</label>
+						<input type="radio" name="sdc" id="ccs" value="ccs" />
+						<label for="ccs">Cifru cu substitutie</label>
+						<input type="radio" name="sdc" id="cmcpss" value="cmcpss" />
+						<label for="cmcpss">Cifru mixt cu permutare si substitutie</label>
+					</form>
 				</div>
 			</div>
 		</div>
 		<div class="container">
-			<select name="cifru_cu_substitutie" id="cifru_cu_substitutie">
-				<option value="sm">Cifru cu substitutie monoalfabetica</option>
-				<option value="cp">Cifru cu substitutie polialfabetica</option>
-			</select>
+			<form onchange="selectHandler()" id="select">
+				<select name="cifru_cu_substitutie" id="cifru_cu_substitutie">
+					<option value="ccsm">Cifru cu substitutie monoalfabetica</option>
+					<option value="ccsp">Cifru cu substitutie polialfabetica</option>
+				</select>
+			</form>
 		</div>
 		<div class="container">
 			<div class="area">
 				<div class="area-title">Prezentarea cifrului</div>
 				<div class="area-content">
-					<span class="area-content__title"></span>
+					<span class="area-content__title" id="ChipherTitle">
+						Cifru cu transpozitie Mysakovski
+					</span>
 					<button>Descrierea cifrului</button>
 					<button>Utilizarea cifrului</button>
 				</div>
@@ -41,5 +48,6 @@
 		</div>
 		<div class="container"></div>
 		<script src="ciphers/transposition.js"></script>
+		<script src="main.js"></script>
 	</body>
 </html>
