@@ -23,7 +23,7 @@ function myszkowski(text, key) {
 
 	//// Read data by column and create a final string
 	// Read data by column and create an object ////array sorted correct
-	let encriptedArr = [];
+	let encryptedArr = [];
 	const obj = {};
 	for (let j = 0; j < keyWidth; j++) {
 		let keyIsRepeated = false;
@@ -42,8 +42,8 @@ function myszkowski(text, key) {
 				} else {
 					obj[curentKey].push(char);
 				}
-				// encriptedArr.push(char);
-				//encriptedStr.concat('', char);
+				// encryptedArr.push(char);
+				//encryptedStr.concat('', char);
 			}
 		}
 	}
@@ -53,11 +53,13 @@ function myszkowski(text, key) {
 		const chrsForThisKey = obj[key].length;
 		for (let i = 0; i < chrsForThisKey; i++) {
 			const char = obj[key][i];
-			encriptedArr.push(char);
+			encryptedArr.push(char);
 		}
 	}
 
-	console.log(encriptedArr.join(''));
+	const encryptedStr = encryptedArr.join('');
+	console.log(encryptedStr);
+	return encryptedStr;
 }
 
 myszkowski('WE ARE DISCOVERED. FLEE AT ONCE', 'TOMATO');
