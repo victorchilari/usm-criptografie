@@ -15,6 +15,7 @@ input[type='radio' i] {
 	display: flex;
 	justify-content: center;
 	padding: 10px 20px;
+	width: 720px;
 }
 .title {
 	height: 1.2em;
