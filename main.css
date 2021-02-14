@@ -4,18 +4,13 @@ input[type='radio' i] {
 	margin: 0;
 	padding: 0;
 }
-.wrapper {
-	display: flex;
-	width: 100%;
-	flex-wrap: wrap;
-	/* flex-direction: column; */
-	justify-content: center;
-}
 .container {
 	display: flex;
 	justify-content: center;
 	padding: 10px 20px;
 	width: 720px;
+	margin: 0 auto;
+	text-align: center;
 }
 .title {
 	height: 1.2em;
