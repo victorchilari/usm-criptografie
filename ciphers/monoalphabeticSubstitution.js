@@ -90,6 +90,7 @@ const nihilist = (text, key, cipherKey) => {
 	// console.log(firstValueEncryptedArr);
 	// console.log(secondValueEncryptedArr);
 	// console.log('Final: ', ...secondValueEncryptedArr);
+	return secondValueEncryptedArr;
 };
 
 nihilist('the early bird', 'SIMPLE', 'EASY');
@@ -130,7 +131,7 @@ const nihilistDecrypt = (array, key, cipherKey) => {
 	const valuesChipherKey = [];
 	for (let k = 0; k < cipherKey.length; k++) {
 		const toFind = cipherKey[k];
-		console.log(toFind);
+		// console.log(toFind);
 
 		for (let i = 0; i < width; i++) {
 			for (let j = 0; j < key.length; j++) {
@@ -142,7 +143,7 @@ const nihilistDecrypt = (array, key, cipherKey) => {
 			}
 		}
 	}
-	console.log(valuesChipherKey);
+	// console.log(valuesChipherKey);
 
 	// Normalize
 	const secondValueEncryptedArr = [];
@@ -150,7 +151,7 @@ const nihilistDecrypt = (array, key, cipherKey) => {
 		const number = array[k] - valuesChipherKey[k % valuesChipherKey.length];
 		secondValueEncryptedArr.push(number);
 	}
-	console.log(secondValueEncryptedArr);
+	// console.log(secondValueEncryptedArr);
 
 	// Parse Tabel base on key
 	const firstValueDecryptedArr = [];
@@ -160,12 +161,9 @@ const nihilistDecrypt = (array, key, cipherKey) => {
 		firstValueDecryptedArr.push(arr[(i - 1) % width][j % width]);
 	}
 
-	console.log(firstValueDecryptedArr);
-	console.log(arr);
+	// console.log(firstValueDecryptedArr);
+	// console.log(arr);
+	return firstValueDecryptedArr.join('');
 };
 
-nihilistDecrypt(
-	[65, 55, 32, 75, 43, 65, 26, 108, 44, 34, 54, 79],
-	'SIMPLE',
-	'EASY'
-);
+nihilistDecrypt(nihilist('the early bird', 'SIMPLE', 'EASY'), 'SIMPLE', 'EASY');
