@@ -6,15 +6,19 @@
     <div class="area">
       <div class="area-title">Precizati tipul sistemului de criptare</div>
       <div class="area-content">
-        <input
-          v-model="selectedCipher"
-          type="radio"
-          name="sdc"
-          id="ccp"
-          value="ccp"
-        />
-        <label for="ccp">Cifru cu permutare</label>
-        <input
+        <template
+          v-for="cipher in ciphers"
+          v-bind:key="cipher.code"
+        >
+          <input
+            v-model="selectedCipher"
+            type="radio"
+            name="sdc"
+          />
+          <label for="ccp">{{cipher.name}}</label>
+          <!-- <label for="ccp">Cifru cu permutare</label> -->
+        </template>
+        <!-- <input
           v-model="selectedCipher"
           type="radio"
           name="sdc"
@@ -29,7 +33,7 @@
           id="cmcpss"
           value="cmcpss"
         />
-        <label for="cmcpss">Cifru mixt cu permutare si substitutie</label>
+        <label for="cmcpss">Cifru mixt cu permutare si substitutie</label> -->
       </div>
     </div>
   </div>
@@ -46,7 +50,7 @@
       <div class="area-title">Prezentarea cifrului</div>
       <div class="area-content">
         <span class="area-content__title" id="ChipherTitle">
-          {{ ciphers[selectedCipher][0] }}
+          {{ selectedCipher }}
         </span>
         <button @click="popupOpenInfo" class="popup-link">
           Descrierea cifrului
@@ -99,12 +103,16 @@ export default {
   name: "App",
   data() {
     return {
-      ciphers: {
-        ccp: ["Cifru cu transpozitie Mysakovski"],
-        ccsm: ["Cifru nihilist"],
-        ccsp: ["Cifru Playfair"],
-        cmcpss: ["Nicodemus"]
-      },
+      ciphers: [
+        {"code": "ccp",
+				"name": "Cifru cu transpozitie Mysakovski"},
+        {"code": "ccsm",
+				"name": "Cifru nihilist"},
+        {"code": "ccsp",
+				"name": "Cifru Playfair"},
+        {"code": "cmcpss",
+				"name": "Nicodemus"}
+      ],
       selectedCipher: "cmcpss"
     };
   },
