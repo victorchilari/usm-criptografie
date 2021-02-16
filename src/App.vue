@@ -34,19 +34,26 @@
     </div>
   </div>
   <div class="container">
-    <form onchange="selectHandler()" id="select">
-      <select name="cifru_cu_substitutie" id="cifru_cu_substitutie">
-        <option value="ccsm">Cifru cu substitutie monoalfabetica</option>
-        <option value="ccsp">Cifru cu substitutie polialfabetica</option>
-      </select>
-    </form>
+    <select
+      v-model="selectedCCS"
+      v-if="selectedCipher == 'ccs'"
+      name="cifru_cu_substitutie"
+      id="cifru_cu_substitutie"
+    >
+      <option value="ccsm">Cifru cu substitutie monoalfabetica</option>
+      <option value="ccsp">Cifru cu substitutie polialfabetica</option>
+    </select>
   </div>
   <div class="container">
     <div class="area">
       <div class="area-title">Prezentarea cifrului</div>
       <div class="area-content">
         <span class="area-content__title" id="ChipherTitle">
-          {{ ciphers[selectedCipher][0] }}
+          {{
+            selectedCipher == "ccs"
+              ? ciphers[selectedCCS][0]
+              : ciphers[selectedCipher][0]
+          }}
         </span>
         <button @click="popupOpenInfo" class="popup-link">
           Descrierea cifrului
@@ -61,8 +68,14 @@
   <div class="popup" id="popupInfo">
     <div class="popop__body">
       <div class="popup__content">
-        <a class="popup__close">x</a>
-        <div class="popup__title">hey</div>
+        <a @click="closePopupAnyway" class="popup__close">x</a>
+        <div class="popup__title">
+          {{
+            selectedCipher == "ccs"
+              ? ciphers[selectedCCS][0]
+              : ciphers[selectedCipher][0]
+          }}
+        </div>
         <div class="popup__text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam
           itaque beatae? Sapiente, labore consequatur atque quaerat doloribus
@@ -78,8 +91,14 @@
   <div class="popup" id="popupUse">
     <div class="popop__body">
       <div class="popup__content">
-        <a class="popup__close">x</a>
-        <div class="popup__title">Use</div>
+        <a @click="closePopupAnyway" class="popup__close">x</a>
+        <div class="popup__title">
+          {{
+            selectedCipher == "ccs"
+              ? ciphers[selectedCCS][0]
+              : ciphers[selectedCipher][0]
+          }}
+        </div>
         <div class="popup__text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam
           itaque beatae? Sapiente, labore consequatur atque quaerat doloribus
@@ -105,7 +124,8 @@ export default {
         ccsp: ["Cifru Playfair"],
         cmcpss: ["Nicodemus"]
       },
-      selectedCipher: "cmcpss"
+      selectedCipher: "cmcpss",
+      selectedCCS: "ccsm"
     };
   },
   methods: {
