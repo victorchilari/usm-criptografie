@@ -6,15 +6,12 @@
     <div class="area">
       <div class="area-title">Precizati tipul sistemului de criptare</div>
       <div class="area-content">
-        <input
-          v-model="selectedCipher"
-          type="radio"
-          name="sdc"
-          id="ccp"
-          value="ccp"
-        />
-        <label for="ccp">Cifru cu permutare</label>
-        <input
+        <template v-for="cipher in ciphers" v-bind:key="cipher.code">
+          <input v-model="selectedCipher" type="radio" name="sdc" />
+          <label for="ccp">{{ cipher.name }}</label>
+          <!-- <label for="ccp">Cifru cu permutare</label> -->
+        </template>
+        <!-- <input
           v-model="selectedCipher"
           type="radio"
           name="sdc"
@@ -29,7 +26,7 @@
           id="cmcpss"
           value="cmcpss"
         />
-        <label for="cmcpss">Cifru mixt cu permutare si substitutie</label>
+        <label for="cmcpss">Cifru mixt cu permutare si substitutie</label> -->
       </div>
     </div>
   </div>
