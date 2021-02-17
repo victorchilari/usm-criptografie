@@ -58,7 +58,11 @@
         <button @click="popupOpenInfo" class="popup-link">
           Descrierea cifrului
         </button>
-        <button @click="popupOpenUse" class="popup-link">
+        <button
+          v-if="!notRealised.includes(selectedCipher)"
+          @click="popupOpenUse"
+          class="popup-link"
+        >
           Utilizarea cifrului
         </button>
       </div>
@@ -82,7 +86,11 @@
           architecto a. Rerum quibusdam delectus quam dolor placeat ratione
           praesentium aspernatur numquam!
         </div>
-        <button @click="popupOpenUse" class="popup-link">
+        <button
+          v-if="!notRealised.includes(selectedCipher)"
+          @click="popupOpenUse"
+          class="popup-link"
+        >
           Utilizarea cifrului
         </button>
       </div>
@@ -129,6 +137,7 @@ export default {
         ccsp: ["Cifrul Playfair"],
         cmcpss: ["Nicodemus"]
       },
+      notRealised: ["cmcpss"],
       selectedCipher: "cmcpss",
       selectedCCS: "ccsm",
       toEncrypt: "WE ARE DISCOVERED. FLEE AT ONCE",
