@@ -100,14 +100,14 @@
           }}, utilizare
         </div>
         <div class="popup__text">
-          <textarea v-model="toEncript" type="text" />
+          <textarea v-model="toEncrypt" type="text" />
           <textarea v-model="secretKey" type="text" />
           <textarea v-model="cipherKey" type="text" />
-          <textarea v-model="toDecript" type="text" />
+          <textarea v-model="toDecrypt" type="text" />
           <br />
-          <button @click="myszkowski(toEncript, secretKey)">Encript</button>
-          <button @click="decript()">
-            Decript
+          <button @click="encrypt()">Encrypt</button>
+          <button @click="decrypt()">
+            Decrypt
           </button>
         </div>
         <button @click="popupOpenInfo" class="popup-link">
@@ -131,19 +131,19 @@ export default {
       },
       selectedCipher: "cmcpss",
       selectedCCS: "ccsm",
-      toEncript: "WE ARE DISCOVERED. FLEE AT ONCE",
+      toEncrypt: "WE ARE DISCOVERED. FLEE AT ONCE",
       secretKey: "TOMATO",
       cipherKey: null,
-      toDecript: null,
+      toDecrypt: null,
       excludedChar: [" ", ",", "."]
     };
   },
   methods: {
-    encript() {
+    encrypt() {
       if (this.selectedCipher === "ccp" || this.selectedCipher === "cmcpss") {
         switch (this.selectedCipher) {
           case "ccp":
-            this.myszkowski(this.toEncript, this.secretKey);
+            this.toDecrypt = this.myszkowski(this.toEncrypt, this.secretKey);
             break;
           case "cmcpss":
             break;
@@ -161,11 +161,14 @@ export default {
         }
       }
     },
-    decript() {
+    decrypt() {
       if (this.selectedCipher === "ccp" || this.selectedCipher === "cmcpss") {
         switch (this.selectedCipher) {
           case "ccp":
-            this.myszkowskiDecrypt(this.toDecript, this.secretKey);
+            this.toEncrypt = this.myszkowskiDecrypt(
+              this.toDecrypt,
+              this.secretKey
+            );
             break;
           case "cmcpss":
             break;
@@ -209,8 +212,6 @@ export default {
 
       const stringLength = clear_str_arr.length;
       const keyWidth = key.length;
-
-      // Repartition chars into table
       let position = 0;
       for (let j = 0; j < stringLength / keyWidth; j++) {
         arr.push([]);
@@ -223,9 +224,6 @@ export default {
           }
         }
       }
-
-      //// Read data by column and create a final string
-      // Read data by column and create an object ////array sorted correct
       let encryptedArr = [];
       const obj = {};
       for (let j = 0; j < keyWidth; j++) {
@@ -245,8 +243,6 @@ export default {
             } else {
               obj[curentKey].push(char);
             }
-            // encryptedArr.push(char);
-            //encryptedStr.concat('', char);
           }
         }
       }
@@ -261,9 +257,7 @@ export default {
       }
 
       const encryptedStr = encryptedArr.join("");
-      console.log(obj);
       console.log(encryptedStr);
-      this.toDecript = encryptedStr;
       return encryptedStr;
     },
     myszkowskiDecrypt(text, keyWord) {
@@ -290,13 +284,9 @@ export default {
           obj[key] = [];
         }
         const howMuchOfMe = sortedKeys.filter(e => e === key).length;
-        //const needToDelete = howMuchOfMe;
-        // -1 becouse influence on length
-        // part created for this code to work correct. Decrypter is wrote bad
         const haveUndefined = keyWord.indexOf(key) + 1 > undefinedCells;
         let howBigIam = howMuchOfMe + rows - 1;
         if (haveUndefined) howBigIam--;
-        // const howBigIam = howMuchOfMe * (keyWord.length - howMuchOfMe + 1);
         for (let i = 0; i < howBigIam; i++) {
           if (
             howMuchOfMe === 1 &&
@@ -309,7 +299,6 @@ export default {
           position++;
         }
       }
-      // console.log(obj);
 
       for (const key in obj) {
         if (obj[key].length < rows) {
@@ -331,11 +320,6 @@ export default {
           arr.push(...arrOfKey);
         }
       }
-      console.log(arr);
-
-      // const correctPostitio = keyWord.split('').map((e, i) => {
-      // 	return;
-      // });
 
       const ascii = ["T", "O", "M", "A", "T", "O"].map(e => e.charCodeAt());
       const asciiFromZero = ascii.map(e => e - 65);
@@ -350,8 +334,6 @@ export default {
         }
       }
 
-      // console.log(asciiFromZero);
-      // const correctPostitio = [4, 2, 1, 0, 5, 3];
       const correctPostitio = asciiFromZero;
       const correctSortedArr = [];
       for (let j = 0; j < correctPostitio.length; j++) {
@@ -359,7 +341,6 @@ export default {
         const row = arr[index];
         correctSortedArr.push(row);
       }
-      console.log(correctSortedArr);
 
       const decryptedArr = [];
       for (let j = 0; j < correctSortedArr[0].length; j++) {
@@ -371,7 +352,6 @@ export default {
 
       const decryptedStr = decryptedArr.join("");
       console.log(decryptedStr);
-      this.toEncript = decryptedStr;
       return decryptedStr;
     }
   }
