@@ -34,6 +34,12 @@ input[type="radio" i] {
   text-align: center;
   background-color: antiquewhite;
 }
+.radio * {
+  margin: 0 6px;
+}
+.radio *:last-child {
+  margin: 0 0 0 6px;
+}
 /* #cifru_cu_substitutie {
 	display: none;
 } */

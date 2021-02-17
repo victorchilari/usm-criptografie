@@ -5,7 +5,7 @@
   <div class="container">
     <div class="area">
       <div class="area-title">Precizati tipul sistemului de criptare</div>
-      <div class="area-content">
+      <div class="area-content radio">
         <input
           v-model="selectedCipher"
           type="radio"
