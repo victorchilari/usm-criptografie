@@ -124,9 +124,9 @@ export default {
   data() {
     return {
       ciphers: {
-        ccp: ["Cifru cu transpozitie Myszkowski"],
-        ccsm: ["Cifru nihilist"],
-        ccsp: ["Cifru Playfair"],
+        ccp: ["Cifrul cu transpozitie Myszkowski"],
+        ccsm: ["Cifrul nihilist"],
+        ccsp: ["Cifrul Playfair"],
         cmcpss: ["Nicodemus"]
       },
       selectedCipher: "cmcpss",
