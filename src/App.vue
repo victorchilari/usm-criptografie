@@ -128,6 +128,14 @@
 
 <script>
 import { myszkowski, myszkowskiDecrypt } from "../ciphers/transposition.js";
+import {
+  nihilist,
+  nihilistDecrypt
+} from "../ciphers/monoalphabeticSubstitution.js";
+import {
+  playfair,
+  playfairDecrypt
+} from "../ciphers/polialphabeticSubstitution.js";
 export default {
   name: "App",
   data() {
@@ -153,8 +161,6 @@ export default {
       if (this.selectedCipher !== "ccs") {
         switch (this.selectedCipher) {
           case "ccp":
-            console.log(this.toEncrypt, this.secretKey);
-            console.log(myszkowski);
             this.toDecrypt = myszkowski(this.toEncrypt, this.secretKey);
             break;
           case "cmcpss":
@@ -165,8 +171,10 @@ export default {
       } else {
         switch (this.selectedCCS) {
           case "ccsm":
+            this.toDecrypt = nihilist(this.toEncrypt, this.secretKey);
             break;
           case "ccsp":
+            this.toDecrypt = playfair(this.toEncrypt, this.secretKey);
             break;
           default:
             break;
@@ -187,8 +195,10 @@ export default {
       } else {
         switch (this.selectedCCS) {
           case "ccsm":
+            this.toDecrypt = nihilistDecrypt(this.toEncrypt, this.secretKey);
             break;
           case "ccsp":
+            this.toDecrypt = playfairDecrypt(this.toEncrypt, this.secretKey);
             break;
           default:
             break;
