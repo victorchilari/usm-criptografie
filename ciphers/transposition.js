@@ -1,7 +1,8 @@
-const excludedChar = [" ", ",", "."];
+import { EXCLUDED_CHAR } from "./globalCFG";
+
 export function myszkowski(text, key) {
   const str_arr = text.split("");
-  const clear_str_arr = str_arr.filter(char => !excludedChar.includes(char));
+  const clear_str_arr = str_arr.filter(char => !EXCLUDED_CHAR.includes(char));
   const arr = [];
 
   const stringLength = clear_str_arr.length;

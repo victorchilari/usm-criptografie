@@ -1,17 +1,16 @@
-const rareChar = "Z";
-// todo rareChar <- input by user
+import { EXCLUDED_CHAR, RARE_CHAR, ALPHABET, WIDTH } from "./globalCFG";
 
-const playfair = (text, key) => {
+export const playfair = (text, key) => {
   (text = text.toUpperCase()), (key = key.toUpperCase());
-  text = text.split("").filter(char => !excludedChar.includes(char));
+  text = text.split("").filter(char => !EXCLUDED_CHAR.includes(char));
 
   const arr = [];
   // Create Tabel based on cipher key
   let position = 0;
   let wasSwitchedToAlphabet = false;
-  for (let i = 0; i < width; i++) {
+  for (let i = 0; i < WIDTH; i++) {
     arr.push([]);
-    for (let j = 0; j < width; j++) {
+    for (let j = 0; j < WIDTH; j++) {
       let char;
       if (key[position] !== undefined) {
         char = key[position];
@@ -27,7 +26,7 @@ const playfair = (text, key) => {
           oneDarray = oneDarray.concat(arr[i]);
         }
 
-        char = alphabet.filter(e => !oneDarray.includes(e))[0];
+        char = ALPHABET.filter(e => !oneDarray.includes(e))[0];
       }
       arr[i][j] = char;
     }
@@ -40,7 +39,7 @@ const playfair = (text, key) => {
     const char1 = text[i];
     let char2 = text[i + 1];
     if (char1 === char2 || char2 === undefined) {
-      char2 = rareChar;
+      char2 = RARE_CHAR;
       i -= 1;
     }
     arrOfCouple.push([char1, char2]);
@@ -55,8 +54,8 @@ const playfair = (text, key) => {
 
     const xy0 = [],
       xy1 = [];
-    for (let i = 0; i < width; i++) {
-      for (let j = 0; j < width; j++) {
+    for (let i = 0; i < WIDTH; i++) {
+      for (let j = 0; j < WIDTH; j++) {
         const char = arr[i][j];
         if (char === toFind0 && xy0.length === 0) {
           xy0.push(i, j);
@@ -76,9 +75,9 @@ const playfair = (text, key) => {
       // Recalculation
       let recalY0 = xy0[0] + 1;
       let recalY1 = xy1[0] + 1;
-      if (recalY0 == width) {
+      if (recalY0 == WIDTH) {
         recalY0 = 0;
-      } else if (recalY1 == width) {
+      } else if (recalY1 == WIDTH) {
         recalY1 = 0;
       }
 
@@ -91,9 +90,9 @@ const playfair = (text, key) => {
       // Recalculation
       let recalX0 = xy0[1] + 1;
       let recalX1 = xy1[1] + 1;
-      if (recalX0 == width) {
+      if (recalX0 == WIDTH) {
         recalX0 = 0;
-      } else if (recalX1 == width) {
+      } else if (recalX1 == WIDTH) {
         recalX1 = 0;
       }
 
@@ -122,18 +121,18 @@ const playfair = (text, key) => {
 playfair("instruments", "monarchy");
 // playfair('clocks will run more quickly during free time', 'MURPHY');
 
-const playfairDecrypt = (text, key) => {
+export const playfairDecrypt = (text, key) => {
   (text = text.toUpperCase()), (key = key.toUpperCase());
-  text = text.split("").filter(char => !excludedChar.includes(char));
+  text = text.split("").filter(char => !EXCLUDED_CHAR.includes(char));
 
   const arr = [];
 
   // Create Tabel based on cipher key
   let position = 0;
   let wasSwitchedToAlphabet = false;
-  for (let i = 0; i < width; i++) {
+  for (let i = 0; i < WIDTH; i++) {
     arr.push([]);
-    for (let j = 0; j < width; j++) {
+    for (let j = 0; j < WIDTH; j++) {
       let char;
       if (key[position] !== undefined) {
         char = key[position];
@@ -149,7 +148,7 @@ const playfairDecrypt = (text, key) => {
           oneDarray = oneDarray.concat(arr[i]);
         }
 
-        char = alphabet.filter(e => !oneDarray.includes(e))[0];
+        char = ALPHABET.filter(e => !oneDarray.includes(e))[0];
       }
       arr[i][j] = char;
     }
@@ -162,7 +161,7 @@ const playfairDecrypt = (text, key) => {
     const char1 = text[i];
     let char2 = text[i + 1];
     if (char1 === char2 || char2 === undefined) {
-      char2 = rareChar;
+      char2 = RARE_CHAR;
       i -= 1;
     }
     arrOfCouple.push([char1, char2]);
@@ -177,8 +176,8 @@ const playfairDecrypt = (text, key) => {
 
     const xy0 = [],
       xy1 = [];
-    for (let i = 0; i < width; i++) {
-      for (let j = 0; j < width; j++) {
+    for (let i = 0; i < WIDTH; i++) {
+      for (let j = 0; j < WIDTH; j++) {
         const char = arr[i][j];
         if (char === toFind0 && xy0.length === 0) {
           xy0.push(i, j);
@@ -197,10 +196,10 @@ const playfairDecrypt = (text, key) => {
       // Recalculation
       let recalY0 = xy0[0] - 1;
       let recalY1 = xy1[0] - 1;
-      if (recalY0 == width) {
-        recalY0 = width - 1;
-      } else if (recalY1 == width) {
-        recalY1 = width - 1;
+      if (recalY0 == WIDTH) {
+        recalY0 = WIDTH - 1;
+      } else if (recalY1 == WIDTH) {
+        recalY1 = WIDTH - 1;
       }
 
       // Apply
@@ -212,9 +211,9 @@ const playfairDecrypt = (text, key) => {
       let recalX0 = xy0[1] - 1;
       let recalX1 = xy1[1] - 1;
       if (recalX0 === -1) {
-        recalX0 = width - 1;
+        recalX0 = WIDTH - 1;
       } else if (recalX1 === -1) {
-        recalX1 = width - 1;
+        recalX1 = WIDTH - 1;
       }
 
       // Apply
