@@ -80,12 +80,7 @@
               : ciphers[selectedCipher][0]
           }}, descriere
         </div>
-        <div class="popup__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam
-          itaque beatae? Sapiente, labore consequatur atque quaerat doloribus
-          architecto a. Rerum quibusdam delectus quam dolor placeat ratione
-          praesentium aspernatur numquam!
-        </div>
+        <div class="popup__text" v-html="objectToShow?.description"></div>
         <button
           v-if="!notRealised.includes(selectedCipher)"
           @click="popupOpenUse"
@@ -127,6 +122,7 @@
 </template>
 
 <script>
+import { DESCRIPTIONS } from "../ciphers/content_info";
 import { myszkowski, myszkowskiDecrypt } from "../ciphers/transposition.js";
 import {
   nihilist,
@@ -146,6 +142,9 @@ export default {
         ccsp: ["Cifrul Playfair"],
         cmcpss: ["Nicodemus"]
       },
+      DESCRIPTIONS: new Array(...DESCRIPTIONS),
+      objectToShow: {},
+      descriptionToShow: "",
       notRealised: ["cmcpss"],
       selectedCipher: "cmcpss",
       selectedCCS: "ccsm",
@@ -195,10 +194,10 @@ export default {
       } else {
         switch (this.selectedCCS) {
           case "ccsm":
-            this.toDecrypt = nihilistDecrypt(this.toEncrypt, this.secretKey);
+            this.toEncrypt = nihilistDecrypt(this.toDecrypt, this.secretKey);
             break;
           case "ccsp":
-            this.toDecrypt = playfairDecrypt(this.toEncrypt, this.secretKey);
+            this.toEncrypt = playfairDecrypt(this.toDecrypt, this.secretKey);
             break;
           default:
             break;
@@ -213,6 +212,10 @@ export default {
       this.closePopupAnyway();
       const showP = document.querySelector("#popupInfo");
       showP.classList.add("open");
+      this.objectToShow =
+        this.selectedCipher == "ccs"
+          ? this.DESCRIPTIONS.filter(e => e.key == this.selectedCCS)[0]
+          : this.DESCRIPTIONS.filter(e => e.key == this.selectedCipher)[0];
     },
     popupOpenUse() {
       this.closePopupAnyway();
