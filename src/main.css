@@ -1,0 +1,45 @@
+body,
+p,
+input[type="radio" i] {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.title {
+  height: 1.2em;
+  font-size: 1.2em;
+  background-color: antiquewhite;
+}
+.area {
+  border: 1px solid gray;
+  padding: 10px 20px;
+}
+.area-title {
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.area-content {
+}
+.area-content__title {
+  display: inline-block;
+  width: 232px;
+  text-align: center;
+  background-color: antiquewhite;
+}
+.radio * {
+  margin: 0 6px;
+}
+.radio *:last-child {
+  margin: 0 0 0 6px;
+}
+/* #cifru_cu_substitutie {
+	display: none;
+} */
