@@ -146,7 +146,7 @@ export default {
       objectToShow: {},
       descriptionToShow: "",
       notRealised: ["cmcpss"],
-      selectedCipher: "cmcpss",
+      selectedCipher: "ccp",
       selectedCCS: "ccsm",
       toEncrypt: "WE ARE DISCOVERED. FLEE AT ONCE",
       secretKey: "TOMATO",
